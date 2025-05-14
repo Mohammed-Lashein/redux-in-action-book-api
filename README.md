@@ -21,3 +21,28 @@ I asked chatGPT and he suggested :
 1. Cloning the repo in another folder
 2. use `rm -rf ./.git` **within the sub-folder**
 3. (This one I used myself) move all of the contents of the subfolder to your project root using : `mv ./sub-folder/* . `
+
+## Note 2: .htaccess infinite redirection  
+
+So I spent a couple of hours trying to understand why this line from `.htaccess` caused infinite redirection . I got this error from the log file in xampp : 
+```text
+[Wed May 14 10:29:43.291565 2025] [core:error] [pid 49162] [client ::1:61584] AH00124:
+ Request exceeded the limit of 10 internal redirects due to 
+ probable configuration error. Use 'LimitInternalRecursion' to increase the limit
+ if necessary. Use 'LogLevel debug' to get a backtrace., 
+ referer: http://localhost/redux-in-action-book-api/
+```
+
+The malicious rule : `RewriteRule .* public/$0 [L]` . 
+
+I thought problem originated from `$0` as chat told me that this doesn't exist in apache . But after reading in the docs, I found that this info [is mentioned in the docs under 'regular expression' part](https://httpd.apache.org/docs/2.4/glossary.html) .  
+
+And to quote from the docs :   
+> `$0` a special variable that holds back reference to the whole matched expression . 
+
+
+Personally, I don't understand why this line `RewriteRule ^ public/index.php [L]` works . Isn't `^` supposed to match the beginning of a pattern to match (and on using `preg_match()` using only `^` as the pattern matches nothing) ?
+
+I asked chat but wasn't convinced by his explanations . And I came here to make an api not to be a master in apache (although I think learning it is important), so I will defer having an answer to this for now (I hope this doesn't increase my technical debt :) . 
+
+
