@@ -1,1 +1,3 @@
 /vendor/
+# local files for trying unready code
+public/another_index.php
