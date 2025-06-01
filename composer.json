@@ -3,8 +3,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Src\\": "src/",
-            "Types\\": "types/"
+            "Src\\": "src/"
         },
         "psr-0": {
             "": "src/"
