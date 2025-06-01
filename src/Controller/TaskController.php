@@ -8,25 +8,7 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use GraphQL\GraphQL;
-
-class Task {
-  public static function all() {
-    return [
-      [
-        'id' => 1,
-        'title' => 'hello world !',
-        'description' => 'amz task',
-        'status' => 'In progress'
-      ],
-      [
-        'id' => 2,
-        'title' => 'hello world 2!',
-        'description' => 'amz task 2',
-        'status' => 'In progress --not started'
-      ]
-    ];
-  }
-}
+use Src\Models\Task;
 
 class TaskController {
   public static function handle() {
