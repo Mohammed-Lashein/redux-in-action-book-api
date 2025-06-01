@@ -3,24 +3,13 @@
 
 namespace Src\Controller;
 
-use App\Types\TaskType;
-use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use GraphQL\GraphQL;
-use Src\Models\Task;
+use Src\Types\QueryType;
 
 class TaskController {
   public static function handle() {
-    $queryType = new ObjectType([
-      'name' => 'Query',
-      'fields' => [
-        'tasks' => [
-          'type' => Type::listOf(new TaskType()),
-          'resolve' => fn() => Task::all()
-        ]
-      ]
-    ]);
+    $queryType = QueryType::generateQueryType();
 
     $schema = new Schema([
       'query' => $queryType
