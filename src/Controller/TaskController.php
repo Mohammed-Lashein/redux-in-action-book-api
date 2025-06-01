@@ -3,6 +3,7 @@
 
 namespace Src\Controller;
 
+use App\Types\TaskType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
@@ -24,20 +25,6 @@ class Task {
         'status' => 'In progress --not started'
       ]
     ];
-  }
-}
-
-class TaskType extends ObjectType {
-  public function __construct() {
-    $config = [
-      'fields' => [
-        'id' => Type::id(),
-        'title' => Type::string(),
-        'description' => Type::string(),
-        'status' => Type::string(),
-      ]
-    ];
-    parent::__construct($config);
   }
 }
 
