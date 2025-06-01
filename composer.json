@@ -3,7 +3,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Src\\": "src/"
+            "Src\\": "src/",
+            "Core\\": "core/"
         }
     },
     "require": {
