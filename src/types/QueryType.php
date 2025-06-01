@@ -2,7 +2,7 @@
 
 namespace Src\Types;
 
-use App\Types\TaskType;
+use Src\Types\TaskType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use Src\Models\Task;
