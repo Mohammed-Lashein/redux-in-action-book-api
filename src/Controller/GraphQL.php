@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace Src\Controller;
 
 use GraphQL\GraphQL as GraphQLBase;
 use GraphQL\Type\Definition\ObjectType;

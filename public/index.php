@@ -5,7 +5,7 @@ require __DIR__ . '/../vendor/autoload.php';
 // For testing only, never in production !
 ini_set('display_errors', 1);
 
-use App\Controller\TaskController;
+use Src\Controller\TaskController;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/redux-in-action-book-api/graphql') {
   /* 
