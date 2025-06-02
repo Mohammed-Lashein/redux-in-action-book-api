@@ -2,6 +2,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Headers: *");
+header("Content-Type: application/json");
+
+
 // For testing only, never in production !
 ini_set('display_errors', 1);
 
