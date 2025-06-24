@@ -46,7 +46,7 @@ class Database {
   public function find($id, $table) {
     $stmt = static::$connection->prepare("SELECT * FROM $table WHERE id = ? LIMIT 1");
     $stmt->execute([$id]);
-    return $stmt->fetchAll();
+    return $stmt->fetch();
   }
   public function pdo() {
     return static::$connection;
