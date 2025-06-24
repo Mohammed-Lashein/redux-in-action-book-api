@@ -14,7 +14,7 @@ class QueryType {
       'fields' => [
         'tasks' => [
           'type' => Type::listOf(new TaskType()),
-          'resolve' => fn() => (new Task())->all()
+          'resolve' => fn() => Task::all()
         ]
       ]
     ]);
