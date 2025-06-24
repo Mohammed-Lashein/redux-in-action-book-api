@@ -6,6 +6,7 @@ namespace Core;
 class Model {
   protected string $table;
   protected Database $db;
+  protected $fillable;
   public function __construct() {
     $this->db = new Database();
   }
@@ -21,5 +22,30 @@ class Model {
   */
   public function all() {
     return $this->db->get('*', $this->table);
+  }
+  protected static function create($attributes) {
+    $instance = new static;
+    // foreach($data as $key => $value) {
+    //   if(in_array($key, $instance->fillable)) {
+    //     $instance->$key = $value;
+    //   }
+    // }
+
+    if(isset($instance->fillable)) {
+      $attributesThatAreAllowedToBeFilled = array_filter(
+        $attributes,
+        fn($key) => in_array($key, $instance->fillable),
+        ARRAY_FILTER_USE_KEY
+      );
+    }
+
+    $isEntityInsertedSuccessfully = $instance->db->create($attributesThatAreAllowedToBeFilled, $instance->table);
+
+    if($isEntityInsertedSuccessfully) {
+      $id = (int) $instance->db->pdo()->lastInsertId();
+      $insertedEntity = $instance->db->find($id, $instance->table);
+      return $insertedEntity;
+    }
+
   }
 }
