@@ -15,7 +15,7 @@ class Model {
     $instance = new static;
     return $instance->db->get('*', $instance->table);
   }
-  protected static function create($attributes) {
+  public static function create($attributes) {
     $instance = new static;
     // foreach($data as $key => $value) {
     //   if(in_array($key, $instance->fillable)) {
