@@ -43,6 +43,11 @@ class Database {
     $stmt = static::$connection->prepare("INSERT INTO $table ($keys) VALUES ($placeholders)");
     return $stmt->execute($attributes);
   }
+  public function find($id, $table) {
+    $stmt = static::$connection->prepare("SELECT * FROM $table WHERE id = ? LIMIT 1");
+    $res =  $stmt->execute([$id]);
+    return $res->fetchAll();
+  }
   public function pdo() {
     return static::$connection;
   }
