@@ -29,4 +29,21 @@ class Database {
     $stmt = static::$connection->query("SELECT $columns FROM $table");
     return $stmt->fetchAll();
   }
+  public function create(array $attributes, string $table) {
+    $keys = implode(', ', array_keys($attributes));
+    $placeholders =   rtrim( // to remove the ', ' at the end 
+      array_reduce(
+        array_keys($attributes),
+        fn($total, $item) => $total .= ":$item, " ,
+        ''
+      ),
+      ', '
+    );
+
+    $stmt = static::$connection->prepare("INSERT INTO $table ($keys) VALUES ($placeholders)");
+    return $stmt->execute($attributes);
+  }
+  public function pdo() {
+    return static::$connection;
+  }
 }
