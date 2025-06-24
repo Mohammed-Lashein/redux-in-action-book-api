@@ -45,4 +45,24 @@ Personally, I don't understand why this line `RewriteRule ^ public/index.php [L]
 
 I asked chat but wasn't convinced by his explanations . And I came here to make an api not to be a master in apache (although I think learning it is important), so I will defer having an answer to this for now (I hope this doesn't increase my technical debt :) . 
 
+## Note 3: You can't call a `protected` method in a parent class outside of the inheritance hierarchy
+Given this situation:
+```php
+Task::create([]); // Error: Undefined method 'create'
+```
+Although that this method is defined in the `Model` class, I am getting this error!  
+After asking chat, he told me that since this method is `protected`, we can't call it outside of the inheritance hierarchy.  
+In other words, we can call it in the `Model` class or any subclass of it, but NOT in the client code (like the example above).  
+
+That's why I made the method in the `Model` public.  
+Another solution was to :
+```php
+class Task extends Model {
+  // You can't name the method as 'create' because this will conflict with the parent class method
+ public static function createTask($data) {
+    return static::create($data);
+  }
+}
+```
+But I think there is no need to create a wrapper for the method of the parent class, we can just make it `public` and call it directly.
 
