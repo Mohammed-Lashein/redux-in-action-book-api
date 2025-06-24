@@ -6,7 +6,7 @@ namespace Core;
 class Model {
   protected string $table;
   protected Database $db;
-  protected $fillable;
+  protected array $fillable = [];
   public function __construct() {
     $this->db = new Database();
   }
