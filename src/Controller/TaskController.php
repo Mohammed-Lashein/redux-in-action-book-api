@@ -22,7 +22,7 @@ class TaskController {
     $parsedBody = json_decode($requestBody, true, 10); // Associative array decoded from JSON
     $queryString = $parsedBody['query']; // The actual GraphQL query string
 
-    $variables = $parsedBody['variables'];
+    $variables = $parsedBody['variables'] ?? null;
 
     try {
       $result = GraphQL::executeQuery($schema, $queryString, null, null, $variables);
