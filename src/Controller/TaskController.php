@@ -34,7 +34,9 @@ class TaskController {
       // $result = [
       //   'error' => $e->getMessage()
       // ];
-      echo $e->getMessage();
+
+      // Don't remove echoeing the error message. I just commented the line so that the errror is not sent to the client
+      // echo $e->getMessage();
     }
 
     header('Content-Type: application/json');
