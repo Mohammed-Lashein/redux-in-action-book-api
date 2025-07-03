@@ -2,6 +2,7 @@
 
 namespace Src\Types;
 
+use Core\TypeRegistry;
 use Src\Types\TaskType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
@@ -13,7 +14,7 @@ class QueryType {
       'name' => 'Query',
       'fields' => [
         'tasks' => [
-          'type' => Type::listOf(new TaskType()),
+          'type' => Type::listOf(TypeRegistry::type(TaskType::class)),
           'resolve' => fn() => Task::all()
         ]
       ]

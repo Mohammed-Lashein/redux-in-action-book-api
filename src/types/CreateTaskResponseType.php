@@ -2,6 +2,7 @@
 
 namespace Src\Types;
 
+use Core\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
@@ -13,7 +14,7 @@ class CreateTaskResponseType extends ObjectType {
         'success' => Type::boolean(),
         'message' => Type::string(),
         'task' => [
-          'type' => new TaskType()
+          'type' => TypeRegistry::type(TaskType::class)
         ]
       ]
     ];
