@@ -15,15 +15,16 @@ class MutationType extends ObjectType {
         'createTask' => [
           'type' => new CreateTaskResponseType(),
           'args' => [
-          'title' => Type::string(),
-          'description' => Type::string(),
-          'status' => Type::string()
+          'newTaskDetails' => [
+          'type' => new TaskInputType()
+          ]
           ],
           'resolve' => function($_parent, $args) {
+            $newTaskDetails = $args['newTaskDetails'];
             $createdTask = Task::create([
-              'title' => $args['title'],
-              'description' => $args['description'],
-              'status' => $args['status']
+              'title' => $newTaskDetails['title'],
+              'description' => $newTaskDetails['description'],
+              'status' => $newTaskDetails['status']
             ]);
 
             if(!is_null($createdTask)) {
