@@ -52,6 +52,17 @@ class MutationType extends ObjectType {
           ],
           'resolve' => function($_parent, $args) {
             // to resolve!
+
+            // update the task data successfully AND get a flag to know whether the update was successful or not
+            
+            /* 
+              We need this unfinished code in order to be able to complete our work here
+              Task::update(), Task::find()
+            */
+
+            // if the update is successful, send a success response
+
+            // if not, send a failure response
           }
         ]
       ]
