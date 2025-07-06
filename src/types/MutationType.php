@@ -44,7 +44,7 @@ class MutationType extends ObjectType {
             ];
           },
         ],
-        'updataTaskStatus' => [
+        'updateTaskStatus' => [
           'type' => new UpdateTaskStatusResponseType(),
                     'args' => [
             'id' => Type::id(),
