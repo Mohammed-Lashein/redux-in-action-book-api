@@ -46,4 +46,8 @@ class Model {
     $instance = new static;
     return $instance->db->update($attributes, $instance->table);
   }
+  public static function find($id) {
+    $instance = new static;
+    return $instance->db->find($id, $instance->table);
+  }
 }
