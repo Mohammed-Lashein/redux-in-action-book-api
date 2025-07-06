@@ -38,6 +38,10 @@ class Model {
       $insertedEntity = $instance->db->find($id, $instance->table);
       return $insertedEntity;
     }
-
+  }
+  public static function update($id, $attributes) {
+    $instance = new static;
+    // the Database::update() is to be created!
+    return $instance->db->update($id, $attributes, $instance->table);
   }
 }
