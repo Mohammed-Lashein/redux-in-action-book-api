@@ -60,7 +60,7 @@ class MutationType extends ObjectType {
               return [
                 'code' => 200,
                 'success' => true,
-                'message' => 'The task was created successfully!',
+                'message' => 'The task status was updated successfully!',
                 'task' => $taskWithUpdatedStatus
               ];
             }
