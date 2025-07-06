@@ -44,7 +44,6 @@ class Model {
   // public static function update($id, $attributes) {
   public static function update($attributes) {
     $instance = new static;
-    // the Database::update() is to be created!
     return $instance->db->update($attributes, $instance->table);
   }
 }
