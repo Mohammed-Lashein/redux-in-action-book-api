@@ -39,9 +39,12 @@ class Model {
       return $insertedEntity;
     }
   }
-  public static function update($id, $attributes) {
+  // the id of the model to update(i.e task in our case) will be provided within the $attributes array
+  // that is coming from the query arguments, so I will change Model::update() signature
+  // public static function update($id, $attributes) {
+  public static function update($attributes) {
     $instance = new static;
     // the Database::update() is to be created!
-    return $instance->db->update($id, $attributes, $instance->table);
+    return $instance->db->update($attributes, $instance->table);
   }
 }
