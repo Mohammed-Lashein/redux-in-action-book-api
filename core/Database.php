@@ -51,4 +51,10 @@ class Database {
   public function pdo() {
     return static::$connection;
   }
+  public function update($attributes, $table) {
+    // prepare the sql update statement set clause to have placeholders from $attributes
+    
+    // use PDO::prepare() and PDOStatement::execute()
+    
+  }
 }
