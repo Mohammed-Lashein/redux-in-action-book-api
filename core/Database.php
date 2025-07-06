@@ -53,9 +53,17 @@ class Database {
   }
   public function update($attributes, $table) {
     // prepare the sql update statement set clause to have placeholders from $attributes
-    /* Since we don't want the id to be added to the column name and column value placeholder, we
-    are filtering it  */
-    $attributesKeysWithoutTheId = array_filter(array_keys($attributes), fn($attribute) => $attribute !== 'id');
+    $placeholders = static::prepareSqlUpdateStatementSetClause($attributes);
+
+    // use PDO::prepare() and PDOStatement::execute()
+    $stmt = static::$connection->prepare("UPDATE $table SET $placeholders WHERE id=:id");
+
+    return $stmt->execute($attributes);
+  }
+  private function prepareSqlUpdateStatementSetClause($attrs) {
+    // Todo: Link to the post explaining my journey to choosing a name for this method: 
+
+    $attributesKeysWithoutTheId = array_filter(array_keys($attrs), fn($attribute) => $attribute !== 'id');
     $placeholders = array_reduce(
     $attributesKeysWithoutTheId,
     fn($total, $item) => $total .= "$item=:$item, ",
@@ -64,9 +72,7 @@ class Database {
     $placeholders = rtrim($placeholders, ', ');
     // var_dump($placeholders);
     // example: status=:status
-
-    // use PDO::prepare() and PDOStatement::execute()
-    $stmt = static::$connection->prepare("UPDATE $table SET $placeholders WHERE id=:id");
-    return $stmt->execute($attributes);
+    
+    return $placeholders; 
   }
 }
