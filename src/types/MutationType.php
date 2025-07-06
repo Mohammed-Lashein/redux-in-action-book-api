@@ -51,18 +51,26 @@ class MutationType extends ObjectType {
             'status' => Type::string(),
           ],
           'resolve' => function($_parent, $args) {
-            // to resolve!
+            // $taskStatusUpdatedSuccessfully = true;
+            $taskStatusUpdatedSuccessfully = Task::update($args);
 
-            // update the task data successfully AND get a flag to know whether the update was successful or not
-            
-            /* 
-              We need this unfinished code in order to be able to complete our work here
-              Task::update(), Task::find()
-            */
+            if($taskStatusUpdatedSuccessfully) {
+              // fetch $taskWithUpdatedStatus from the server
+              $taskWithUpdatedStatus = Task::find($args['id']);
+              return [
+                'code' => 200,
+                'success' => true,
+                'message' => 'The task was created successfully!',
+                'task' => $taskWithUpdatedStatus
+              ];
+            }
 
-            // if the update is successful, send a success response
-
-            // if not, send a failure response
+              return [
+                'code' => 500,
+                'success' => false,
+                'message' => 'There was an error, the task status could not be updated',
+                'task' => null
+              ];
           }
         ]
       ]
